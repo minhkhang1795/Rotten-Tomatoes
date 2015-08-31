@@ -22,7 +22,12 @@ class DVDDetailsViewController: UIViewController {
         titleLabel.text = DVD["title"] as? String
         synopsisLabel.text = DVD["synopsis"] as? String
         
-        //Capture urlString
+        // Get small image URL
+        let url = NSURL(string: DVD.valueForKeyPath("posters.thumbnail") as! String)!
+        imageView.setImageWithURL(url)
+        
+        //Capture urlString with bigger image
+
         var urlString = DVD.valueForKeyPath("posters.original") as! String
         var range = urlString.rangeOfString(".*cloudfront.net/", options: .RegularExpressionSearch)
         if let range = range {

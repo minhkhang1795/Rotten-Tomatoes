@@ -13,16 +13,24 @@ class MovieDetailsViewController: UIViewController {
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var synopsisLabel: UILabel!
+    @IBOutlet weak var scrollView: UIScrollView!
     
     var movie: NSDictionary!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        scrollView.contentSize.height = 1000
         titleLabel.text = movie["title"] as? String
         synopsisLabel.text = movie["synopsis"] as? String
+        titleLabel.sizeToFit()
+        synopsisLabel.sizeToFit()
         
-        //Capture urlString
+        // Get small image URL
+        let url = NSURL(string: movie.valueForKeyPath("posters.thumbnail") as! String)!
+        imageView.setImageWithURL(url)
+        
+        //Capture urlString with bigger image
         var urlString = movie.valueForKeyPath("posters.original") as! String
         var range = urlString.rangeOfString(".*cloudfront.net/", options: .RegularExpressionSearch)
         

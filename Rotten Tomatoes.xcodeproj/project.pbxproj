@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2A2310891B8F137A00E7CA33 /* DVDsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A2310881B8F137A00E7CA33 /* DVDsViewController.swift */; };
-		2A7C3D7F1B9036D000AA3955 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A7C3D7E1B9036D000AA3955 /* Reachability.swift */; };
+		2A344AC41B94CD4700A177E5 /* UIViewController+Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A344AC31B94CD4700A177E5 /* UIViewController+Reachability.swift */; };
 		2A9ECBE61B8EF254008707C7 /* MovieDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A9ECBE51B8EF254008707C7 /* MovieDetailsViewController.swift */; };
 		2AAAD0E41B8F0F620042C595 /* DVDDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AAAD0E31B8F0F620042C595 /* DVDDetailsViewController.swift */; };
 		2AAAD0E61B8F0F960042C595 /* DVDCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AAAD0E51B8F0F960042C595 /* DVDCell.swift */; };
@@ -34,7 +34,7 @@
 
 /* Begin PBXFileReference section */
 		2A2310881B8F137A00E7CA33 /* DVDsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DVDsViewController.swift; sourceTree = "<group>"; };
-		2A7C3D7E1B9036D000AA3955 /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
+		2A344AC31B94CD4700A177E5 /* UIViewController+Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Reachability.swift"; sourceTree = "<group>"; };
 		2A9ECBE51B8EF254008707C7 /* MovieDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieDetailsViewController.swift; sourceTree = "<group>"; };
 		2AAAD0E31B8F0F620042C595 /* DVDDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DVDDetailsViewController.swift; sourceTree = "<group>"; };
 		2AAAD0E51B8F0F960042C595 /* DVDCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DVDCell.swift; sourceTree = "<group>"; };
@@ -100,12 +100,11 @@
 				2AB0DE501B8DBF2B00029EB8 /* Views */,
 				2AB0DE4B1B8DAFCD00029EB8 /* View Controllers */,
 				2AB0DE291B8DAF7100029EB8 /* AppDelegate.swift */,
+				2AB55CED1B8E219200EBE40A /* Rotten Tomatoes-Bridging-Header.h */,
 				2AB0DE2D1B8DAF7200029EB8 /* Main.storyboard */,
 				2AB0DE301B8DAF7200029EB8 /* Images.xcassets */,
 				2AB0DE321B8DAF7200029EB8 /* LaunchScreen.xib */,
 				2AB0DE271B8DAF7100029EB8 /* Supporting Files */,
-				2AB55CED1B8E219200EBE40A /* Rotten Tomatoes-Bridging-Header.h */,
-				2A7C3D7E1B9036D000AA3955 /* Reachability.swift */,
 			);
 			path = "Rotten Tomatoes";
 			sourceTree = "<group>";
@@ -142,6 +141,7 @@
 				2A2310881B8F137A00E7CA33 /* DVDsViewController.swift */,
 				2A9ECBE51B8EF254008707C7 /* MovieDetailsViewController.swift */,
 				2AAAD0E31B8F0F620042C595 /* DVDDetailsViewController.swift */,
+				2A344AC31B94CD4700A177E5 /* UIViewController+Reachability.swift */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -311,10 +311,10 @@
 				2AAAD0E41B8F0F620042C595 /* DVDDetailsViewController.swift in Sources */,
 				2A9ECBE61B8EF254008707C7 /* MovieDetailsViewController.swift in Sources */,
 				2AB0DE2A1B8DAF7100029EB8 /* AppDelegate.swift in Sources */,
+				2A344AC41B94CD4700A177E5 /* UIViewController+Reachability.swift in Sources */,
 				2AB0DE4F1B8DB0E800029EB8 /* MoviesViewController.swift in Sources */,
 				2AB0DE521B8DBF5F00029EB8 /* MovieCell.swift in Sources */,
 				2AAAD0E61B8F0F960042C595 /* DVDCell.swift in Sources */,
-				2A7C3D7F1B9036D000AA3955 /* Reachability.swift in Sources */,
 				2A2310891B8F137A00E7CA33 /* DVDsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -394,6 +394,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -432,6 +433,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;

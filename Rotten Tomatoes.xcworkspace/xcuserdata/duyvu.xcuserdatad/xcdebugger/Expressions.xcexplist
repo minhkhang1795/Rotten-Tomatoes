@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "Rotten_Tomatoes.MoviesViewController.(onRefresh (Rotten_Tomatoes.MoviesViewController) -&gt; () -&gt; ()).(closure #2):MoviesViewController.swift">
+      </ContextState>
+      <ContextState
+         contextName = "Rotten_Tomatoes.MoviesViewController.(viewDidLoad (Rotten_Tomatoes.MoviesViewController) -&gt; () -&gt; ()).(closure #2):MoviesViewController.swift">
+      </ContextState>
+      <ContextState
+         contextName = "Rotten_Tomatoes.MoviesViewController.viewDidLoad (Rotten_Tomatoes.MoviesViewController)() -&gt; ():MoviesViewController.swift">
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>

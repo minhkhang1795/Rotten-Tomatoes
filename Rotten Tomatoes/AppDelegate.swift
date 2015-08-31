@@ -15,15 +15,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        // Override point for customization after application launch.
-        if Reachability.isConnectedToNetwork() == true {
-            println("Internet connection OK")
-        } else {
-            println("Internet connection FAILED")
-            //var alert = UIImage(
-            //     (title: "No Internet Connection", message: "Make sure your device is connected to the internet.", delegate: nil, cancelButtonTitle: "OK")
-            //alert.show()
-        }
+        
         return true
     }
 
