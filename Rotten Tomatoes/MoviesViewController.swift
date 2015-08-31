@@ -64,7 +64,7 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
             dispatch_async(dispatch_get_main_queue()) {
                 MBProgressHUD.hideAllHUDsForView(self.view, animated: true)
                 //progressView.hide(true)
-                println(self.networkErrMess.frame.origin.y)
+                println(self.xButton.frame.origin.y)
             }
         }
         println("done")
