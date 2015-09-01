@@ -20,5 +20,6 @@ Assignment 1: </b>Rotten Tomatoes
 + [x] Customize the navigation bar. (optional)
 
 <b> Walkthrough of user stories: </b>
+
 ![alt tag](https://github.com/vuminhkhang1995/-Week-1-Assignment-1-Rotten-Tomatoes/blob/master/Walkthrough.gif)
 
