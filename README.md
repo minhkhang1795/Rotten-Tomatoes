@@ -12,7 +12,7 @@ Assignment 1: </b>Rotten Tomatoes
 + [x] User sees error message when there's a networking error. 
 + [x] User can pull to refresh the movie list. 
 + [x] Add a tab bar for Box Office and DVD. (optional)
-+ Implement segmented control to switch between list view and grid view (optional)
++ [x] Implement segmented control to switch between list view and grid view (optional)
 + [x] Add a search bar. (optional)
 + All images fade in (optional)
 + [x] For the large poster, load the low-res image first, switch to high-res when complete (optional)
@@ -20,4 +20,5 @@ Assignment 1: </b>Rotten Tomatoes
 + [x] Customize the navigation bar. (optional)
 
 <b> Walkthrough of user stories: </b>
+![alt tag](https://github.com/vuminhkhang1995/-Week-1-Assignment-1-Rotten-Tomatoes/blob/master/Walkthrough.gif)
 
