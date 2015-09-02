@@ -37,6 +37,7 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
         refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: "onRefresh", forControlEvents: UIControlEvents.ValueChanged)
         refreshControl.attributedTitle = NSAttributedString(string: "Pull to Refresh")
+        collectionView.insertSubview(refreshControl, atIndex: 0)
         tableView.insertSubview(refreshControl, atIndex: 0)
         
         
@@ -65,7 +66,6 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
                         self.movies = json["movies"] as? [NSDictionary]
                         self.tableView.reloadData()
                         self.collectionView.reloadData()
-
                     }
                 }
                 }, errorMessageView: self.networkErrMess, closeButton: self.xButton)
@@ -83,7 +83,7 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
     
     
     
-    // MARK: - Table Control
+    // MARK: - Table View Control
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if let movies = movies {
@@ -138,17 +138,14 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
         cell.titleLabel.text = movie["title"] as? String
         
         //Capture urlString with bigger image
-        var urlString = movie.valueForKeyPath("posters.original") as! String
+        var urlString = movie.valueForKeyPath("posters.thumbnail") as! String
         var range = urlString.rangeOfString(".*cloudfront.net/", options: .RegularExpressionSearch)
         
         if let range = range {
             urlString = urlString.stringByReplacingCharactersInRange(range, withString: "https://content6.flixster.com/")
-            
-            //convert urlString -> NSURL
             let url = NSURL(string: urlString)!
             cell.posterView.setImageWithURL(url)
         }
-        
         return cell
     }
     
@@ -161,10 +158,12 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
             self.navigationItem.rightBarButtonItem!.image = UIImage(named: "listIcon.png")
             tableView.hidden = true
             collectionView.hidden = false
+            collectionView.insertSubview(refreshControl, atIndex: 0)
         } else {
             self.navigationItem.rightBarButtonItem!.image = UIImage(named: "gridIcon.png")
             tableView.hidden = false
             collectionView.hidden = true
+            tableView.insertSubview(refreshControl, atIndex: 0)
         }
     }
     

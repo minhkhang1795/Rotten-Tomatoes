@@ -27,7 +27,7 @@ class MovieDetailsViewController: UIViewController {
         scrollView.contentSize.height = titleLabel.frame.height + synopsisLabel.frame.height + 500
         
         // Get small image URL
-        let url = NSURL(string: movie.valueForKeyPath("posters.thumbnail") as! String)!
+        var url = NSURL(string: movie.valueForKeyPath("posters.thumbnail") as! String)!
         imageView.setImageWithURL(url)
         
         //Capture urlString with bigger image
@@ -35,10 +35,10 @@ class MovieDetailsViewController: UIViewController {
         var range = urlString.rangeOfString(".*cloudfront.net/", options: .RegularExpressionSearch)
         
         if let range = range {
-        urlString = urlString.stringByReplacingCharactersInRange(range, withString: "https://content6.flixster.com/")
-            
+            urlString = urlString.stringByReplacingCharactersInRange(range, withString: "https://content6.flixster.com/")
+
             //convert urlString -> NSURL
-            let url = NSURL(string: urlString)!
+            url = NSURL(string: urlString)!
             imageView.setImageWithURL(url)
         }
     }
