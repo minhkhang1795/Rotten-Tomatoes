@@ -20,11 +20,11 @@ class MovieDetailsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        scrollView.contentSize.height = 1000
         titleLabel.text = movie["title"] as? String
         synopsisLabel.text = movie["synopsis"] as? String
         titleLabel.sizeToFit()
         synopsisLabel.sizeToFit()
+        scrollView.contentSize.height = titleLabel.frame.height + synopsisLabel.frame.height + 500
         
         // Get small image URL
         let url = NSURL(string: movie.valueForKeyPath("posters.thumbnail") as! String)!

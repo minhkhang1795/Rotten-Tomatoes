@@ -9,24 +9,72 @@
             <objects>
                 <viewController id="vXZ-lx-hvc" customClass="MoviesViewController" customModule="Rotten_Tomatoes" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="kh9-bI-dsS">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="519"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="120" sectionHeaderHeight="22" sectionFooterHeight="22" id="Rvy-n3-tIJ">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Network Error" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="FVW-QG-gsd">
+                                <rect key="frame" x="0.0" y="32" width="320" height="32"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            </label>
+                            <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="x" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Vic-7c-IuA">
+                                <rect key="frame" x="287" y="32" width="32" height="32"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="19"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <collectionView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="V2Q-gO-YCg">
+                                <rect key="frame" x="0.0" y="107" width="320" height="419"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="dJp-C1-uqr">
+                                    <size key="itemSize" width="155" height="214"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="MovieCollectionCell" id="HH7-bB-5Kw" customClass="MovieCollectionCell" customModule="Rotten_Tomatoes" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="155" height="214"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="155" height="214"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="dGH-fa-Lhu">
+                                                    <rect key="frame" x="6" y="0.0" width="141" height="176"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="mD5-wH-2iP">
+                                                    <rect key="frame" x="8" y="177" width="139" height="37"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="13"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                        <connections>
+                                            <outlet property="posterView" destination="dGH-fa-Lhu" id="kjl-TD-CNU"/>
+                                            <outlet property="titleLabel" destination="mD5-wH-2iP" id="nF2-em-nlx"/>
+                                            <segue destination="ukb-P5-gWv" kind="push" identifier="gridSegue" id="NMs-YH-Qwp"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="120" sectionHeaderHeight="22" sectionFooterHeight="22" id="Rvy-n3-tIJ">
+                                <rect key="frame" x="0.0" y="107" width="320" height="419"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <gestureRecognizers/>
                                 <color key="separatorColor" red="0.26507957939999999" green="0.58167613640000004" blue="0.11648583749999999" alpha="1" colorSpace="calibratedRGB"/>
-                                <searchBar key="tableHeaderView" contentMode="redraw" placeholder="Search your movies" id="NKr-Yu-OBx">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                    <color key="barTintColor" red="0.89411764709999997" green="0.89411764709999997" blue="0.89411764709999997" alpha="1" colorSpace="calibratedRGB"/>
-                                    <textInputTraits key="textInputTraits"/>
-                                </searchBar>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="MovieCell" rowHeight="120" id="kgK-vE-OpU" customClass="MovieCell" customModule="Rotten_Tomatoes" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="130" width="320" height="120"/>
+                                        <rect key="frame" x="0.0" y="22" width="320" height="120"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="kgK-vE-OpU" id="TBb-Ua-UjZ">
                                             <rect key="frame" x="0.0" y="0.0" width="287" height="119"/>
@@ -61,74 +109,53 @@
                                             <outlet property="posterView" destination="erJ-c5-UeO" id="2Cw-Iu-eh2"/>
                                             <outlet property="synopsisLabel" destination="yro-F5-k1v" id="Tg4-kA-dIf"/>
                                             <outlet property="titleLabel" destination="gir-xz-K8A" id="KpO-d1-ebt"/>
-                                            <segue destination="ukb-P5-gWv" kind="push" id="GXh-6k-pPH"/>
+                                            <segue destination="ukb-P5-gWv" kind="push" identifier="listSegue" id="GXh-6k-pPH"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Network Error" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="FVW-QG-gsd">
-                                <rect key="frame" x="0.0" y="32" width="320" height="32"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
-                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                            </label>
-                            <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="x" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Vic-7c-IuA">
-                                <rect key="frame" x="287" y="32" width="32" height="32"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="19"/>
-                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="V2Q-gO-YCg">
-                                <rect key="frame" x="0.0" y="575" width="320" height="576"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="dJp-C1-uqr">
-                                    <size key="itemSize" width="155" height="155"/>
-                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                </collectionViewFlowLayout>
-                                <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="HH7-bB-5Kw">
-                                        <rect key="frame" x="0.0" y="0.0" width="155" height="155"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="155" height="155"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        </view>
-                                    </collectionViewCell>
-                                </cells>
-                            </collectionView>
-                            <view alpha="0.0" contentMode="scaleToFill" id="OFS-Cq-piW">
-                                <rect key="frame" x="0.0" y="107" width="319" height="460"/>
+                            <searchBar contentMode="redraw" placeholder="Search your movies" id="GTz-Yb-YQP">
+                                <rect key="frame" x="0.0" y="64" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <color key="barTintColor" red="0.89411764709999997" green="0.89411764709999997" blue="0.89411764709999997" alpha="1" colorSpace="calibratedRGB"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </searchBar>
+                            <view alpha="0.0" contentMode="scaleToFill" id="OFS-Cq-piW" userLabel="fadedView">
+                                <rect key="frame" x="0.0" y="64" width="319" height="460"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
                         </subviews>
                     </view>
+                    <toolbarItems/>
                     <navigationItem key="navigationItem" title="Movies" id="1D4-mb-zrU">
-                        <barButtonItem key="rightBarButtonItem" title="Item" id="x3l-qX-Zlc"/>
+                        <barButtonItem key="rightBarButtonItem" image="gridIcon" id="x3l-qX-Zlc">
+                            <connections>
+                                <action selector="changeViewonTap:" destination="vXZ-lx-hvc" id="way-B3-r4H"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="changeViewButton" destination="x3l-qX-Zlc" id="fIO-ZH-ygt"/>
+                        <outlet property="collectionView" destination="V2Q-gO-YCg" id="UkJ-Lq-cmM"/>
                         <outlet property="fadedView" destination="OFS-Cq-piW" id="Pxj-FW-WcH"/>
                         <outlet property="networkErrMess" destination="FVW-QG-gsd" id="jV0-XG-rGI"/>
-                        <outlet property="searchBar" destination="NKr-Yu-OBx" id="AM8-lx-57d"/>
+                        <outlet property="searchBar" destination="GTz-Yb-YQP" id="iaH-PQ-mmp"/>
                         <outlet property="tableView" destination="Rvy-n3-tIJ" id="8i5-DP-6jT"/>
                         <outlet property="xButton" destination="Vic-7c-IuA" id="STF-rX-JXi"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1712" y="-90"/>
+            <point key="canvasLocation" x="1720" y="300"/>
         </scene>
         <!--Movie Details View Controller-->
         <scene sceneID="AbS-ss-WRM">
             <objects>
                 <viewController id="ukb-P5-gWv" customClass="MovieDetailsViewController" customModule="Rotten_Tomatoes" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="AzX-HZ-JtY">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="951"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="GCz-lu-wZ1">
@@ -152,7 +179,7 @@
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Bdp-xC-Wpm">
                                                 <rect key="frame" x="8" y="60" width="304" height="600"/>
-                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <attributedString key="attributedText">
                                                     <fragment content="Label">
                                                         <attributes>
@@ -173,8 +200,6 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="FgP-kV-r7s"/>
-                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-                    <size key="freeformSize" width="320" height="1000"/>
                     <connections>
                         <outlet property="imageView" destination="GCz-lu-wZ1" id="gsp-Az-z7J"/>
                         <outlet property="scrollView" destination="4px-5b-neO" id="wNg-8Q-Uxp"/>
@@ -273,7 +298,7 @@
                                 </searchBar>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="DVDCell" rowHeight="120" id="ke9-qD-NcZ" customClass="DVDCell" customModule="Rotten_Tomatoes" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="66" width="320" height="120"/>
+                                        <rect key="frame" x="0.0" y="130" width="320" height="120"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ke9-qD-NcZ" id="Iur-zh-rG2">
                                             <rect key="frame" x="0.0" y="0.0" width="287" height="119"/>
@@ -310,7 +335,9 @@
                         </subviews>
                         <gestureRecognizers/>
                     </view>
-                    <navigationItem key="navigationItem" title="DVDs" id="DtX-z1-pmC"/>
+                    <navigationItem key="navigationItem" title="DVDs" id="DtX-z1-pmC">
+                        <barButtonItem key="rightBarButtonItem" image="gridIcon" id="bF9-5D-H8r"/>
+                    </navigationItem>
                     <connections>
                         <outlet property="searchBar" destination="lK1-nT-NbU" id="osF-4H-Dqj"/>
                         <outlet property="tableView" destination="e1w-9v-89V" id="TzP-bR-48d"/>
@@ -383,6 +410,7 @@
     </scenes>
     <resources>
         <image name="DVD" width="58" height="58"/>
+        <image name="gridIcon" width="40" height="40"/>
         <image name="movie" width="40" height="40"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
@@ -390,5 +418,8 @@
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
+    <inferredMetricsTieBreakers>
+        <segue reference="NMs-YH-Qwp"/>
+    </inferredMetricsTieBreakers>
     <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
 </document>

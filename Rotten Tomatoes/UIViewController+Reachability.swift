@@ -54,6 +54,5 @@ extension UIViewController {
                 }, completion: nil)
             }
         }
-        println(errorMessageView.frame.origin.y)
     }
 }

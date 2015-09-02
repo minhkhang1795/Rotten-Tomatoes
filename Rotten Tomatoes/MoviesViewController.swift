@@ -8,14 +8,16 @@
 
 import UIKit
 
-class MoviesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate {
+class MoviesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UISearchBarDelegate {
     
+    @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var networkErrMess: UILabel!
     @IBOutlet weak var xButton: UILabel!
     @IBOutlet weak var fadedView: UIView!
-
+    @IBOutlet weak var changeViewButton: UIBarButtonItem!
+    
     var movies: [NSDictionary]?
     var refreshControl: UIRefreshControl!
     var searchActive : Bool = false
@@ -23,10 +25,12 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        println(self.networkErrMess.frame.origin.y)
+       
         // Setup delegates
         tableView.dataSource = self
         tableView.delegate = self
+        collectionView.dataSource = self
+        collectionView.delegate = self
         searchBar.delegate = self
         
         // Refreshing
@@ -44,9 +48,12 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
         let xButtonTapGestureRecognizer = UITapGestureRecognizer(target: self, action: "onXButtonTap")
         self.xButton.addGestureRecognizer(xButtonTapGestureRecognizer)
         
+        let changeViewButtontapGestureRecognizer = UITapGestureRecognizer(target: self, action: "onchangeViewButtonTap")
+        
         // Loading state while waiting for API
         let progressView = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
         progressView.labelText = "Loading..."
+        
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0)) {
         
             self.doIfConnected({
@@ -57,24 +64,24 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
                     if let json = json {
                         self.movies = json["movies"] as? [NSDictionary]
                         self.tableView.reloadData()
+                        self.collectionView.reloadData()
+
                     }
                 }
                 }, errorMessageView: self.networkErrMess, closeButton: self.xButton)
             
             dispatch_async(dispatch_get_main_queue()) {
-                MBProgressHUD.hideAllHUDsForView(self.view, animated: true)
-                //progressView.hide(true)
-                println(self.xButton.frame.origin.y)
+                progressView.hide(true)
             }
         }
-        println("done")
-        
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    
     
     // MARK: - Table Control
     
@@ -108,6 +115,61 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
     
+    
+    
+    // MARK: Collection View Control
+    
+    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        if let movies = movies {
+            if (searchActive) {
+                return filtered.count
+            }
+            return movies.count
+        } else {
+            return 0
+        }
+    }
+    
+    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+        var cell = collectionView.dequeueReusableCellWithReuseIdentifier("MovieCollectionCell", forIndexPath: indexPath) as! MovieCollectionCell
+        
+        var movie = searchActive ? filtered[indexPath.row] : movies![indexPath.row]
+        
+        cell.titleLabel.text = movie["title"] as? String
+        
+        //Capture urlString with bigger image
+        var urlString = movie.valueForKeyPath("posters.original") as! String
+        var range = urlString.rangeOfString(".*cloudfront.net/", options: .RegularExpressionSearch)
+        
+        if let range = range {
+            urlString = urlString.stringByReplacingCharactersInRange(range, withString: "https://content6.flixster.com/")
+            
+            //convert urlString -> NSURL
+            let url = NSURL(string: urlString)!
+            cell.posterView.setImageWithURL(url)
+        }
+        
+        return cell
+    }
+    
+    
+    
+    // MARK: Change View on Tap
+    
+    @IBAction func changeViewonTap(sender: AnyObject) {
+        if tableView.hidden == false {
+            self.navigationItem.rightBarButtonItem!.image = UIImage(named: "listIcon.png")
+            tableView.hidden = true
+            collectionView.hidden = false
+        } else {
+            self.navigationItem.rightBarButtonItem!.image = UIImage(named: "gridIcon.png")
+            tableView.hidden = false
+            collectionView.hidden = true
+        }
+    }
+    
+    
+
     // MARK: - Refresh Control & Error Message
     
     func onRefresh() {
@@ -120,6 +182,7 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
                 if let json = json {
                     self.movies = json["movies"] as? [NSDictionary]
                     self.tableView.reloadData()
+                    self.collectionView.reloadData()
                 }
             }
             }, errorMessageView: self.networkErrMess, closeButton: self.xButton)
@@ -139,7 +202,10 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
         }
     }
     
+    
+    
     // MARK: - Search Bar
+    
     func searchBarTextDidBeginEditing(searchBar: UISearchBar) {
         self.fadedView.userInteractionEnabled = true
         self.fadedView.alpha = 0.35
@@ -172,6 +238,7 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
             searchActive = true
         }
         self.tableView.reloadData()
+        self.collectionView.reloadData()
     }
     
     func onFadedViewTap() {
@@ -180,16 +247,28 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
         self.fadedView.alpha = 0
     }
     
+    
+    
     // MARK: - Navigation
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        let cell = sender as! UITableViewCell
-        let indexPath = tableView.indexPathForCell(cell)!
-        
-        let movie = searchActive ? filtered[indexPath.row] : movies![indexPath.row]
-        
-        let movieDetailsViewController = segue.destinationViewController as! MovieDetailsViewController
-        movieDetailsViewController.movie = movie
+        if segue.identifier == "listSegue" {
+            let cell = sender as! UITableViewCell
+            let indexPath = tableView.indexPathForCell(cell)!
+            
+            let movie = searchActive ? filtered[indexPath.row] : movies![indexPath.row]
+            
+            let movieDetailsViewController = segue.destinationViewController as! MovieDetailsViewController
+            movieDetailsViewController.movie = movie
+        } else {
+            let cell = sender as! UICollectionViewCell
+            let indexPath = collectionView.indexPathForCell(cell)!
+            
+            let movie = searchActive ? filtered[indexPath.row] : movies![indexPath.row]
+            
+            let movieDetailsViewController = segue.destinationViewController as! MovieDetailsViewController
+            movieDetailsViewController.movie = movie
+        }
         
         self.searchBar.endEditing(true)
         self.fadedView.userInteractionEnabled = false
