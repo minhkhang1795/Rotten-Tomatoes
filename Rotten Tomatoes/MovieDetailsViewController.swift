@@ -20,26 +20,37 @@ class MovieDetailsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        //Description
         titleLabel.text = movie["title"] as? String
         synopsisLabel.text = movie["synopsis"] as? String
         titleLabel.sizeToFit()
         synopsisLabel.sizeToFit()
         scrollView.contentSize.height = titleLabel.frame.height + synopsisLabel.frame.height + 500
         
-        // Get small image URL
-        var url = NSURL(string: movie.valueForKeyPath("posters.thumbnail") as! String)!
-        imageView.setImageWithURL(url)
         
-        //Capture urlString with bigger image
+        // Get small-image URL
+        var url_small = NSURL(string: movie.valueForKeyPath("posters.thumbnail") as! String)!
+        var urlRequest_small = NSURLRequest(URL: url_small, cachePolicy: NSURLRequestCachePolicy.ReturnCacheDataElseLoad, timeoutInterval: 600)
+        
+        //Capture urlString with larger image
         var urlString = movie.valueForKeyPath("posters.original") as! String
         var range = urlString.rangeOfString(".*cloudfront.net/", options: .RegularExpressionSearch)
-        
         if let range = range {
             urlString = urlString.stringByReplacingCharactersInRange(range, withString: "https://content6.flixster.com/")
 
-            //convert urlString -> NSURL
-            url = NSURL(string: urlString)!
-            imageView.setImageWithURL(url)
+            //convert String -> NSURL
+            var url_large = NSURL(string: urlString)!
+            
+            //convert NSURL -> NSURLRequest
+            var urlRequest_large = NSURLRequest(URL: url_large)
+            
+            //get placeholderImage from URL_small image
+            var placeholderImage = UIImage(data: NSData(contentsOfURL: url_small)!)
+            
+            self.imageView.setImageWithURLRequest(urlRequest_large, placeholderImage: placeholderImage, success: { (request: NSURLRequest!,response: NSHTTPURLResponse!, image: UIImage!) -> Void in
+                    self.imageView.image = image
+                }, failure: nil)
+            //THIS WILL RETURN IMMEDIATELY if I've already downloaded the high resolution image: imageView.setImageWithURL(url)
         }
     }
 

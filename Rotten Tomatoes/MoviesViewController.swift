@@ -20,6 +20,7 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
     
     var movies: [NSDictionary]?
     var refreshControl: UIRefreshControl!
+    var refreshControl2: UIRefreshControl!
     var searchActive : Bool = false
     var filtered: [NSDictionary] = []
     
@@ -37,9 +38,10 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
         refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: "onRefresh", forControlEvents: UIControlEvents.ValueChanged)
         refreshControl.attributedTitle = NSAttributedString(string: "Pull to Refresh")
-        collectionView.insertSubview(refreshControl, atIndex: 0)
+        refreshControl2 = refreshControl
         tableView.insertSubview(refreshControl, atIndex: 0)
-        
+        collectionView.insertSubview(refreshControl2, atIndex: 0)
+
         
         let fadedViewtapGestureRecognizer = UITapGestureRecognizer(target: self, action: "onFadedViewTap")
         self.fadedView.addGestureRecognizer(fadedViewtapGestureRecognizer)
@@ -55,8 +57,7 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
         let progressView = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
         progressView.labelText = "Loading..."
         
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0)) {
-        
+            println(self.networkErrMess.frame.origin.y)
             self.doIfConnected({
                 let url = NSURL(string: "https://gist.githubusercontent.com/timothy1ee/d1778ca5b944ed974db0/raw/489d812c7ceeec0ac15ab77bf7c47849f2d1eb2b/gistfile1.json")!
                 let request = NSURLRequest(URL: url)
@@ -69,11 +70,10 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
                     }
                 }
                 }, errorMessageView: self.networkErrMess, closeButton: self.xButton)
-            
+            println(self.networkErrMess.frame.origin.y)
             dispatch_async(dispatch_get_main_queue()) {
                 progressView.hide(true)
             }
-        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -158,12 +158,11 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
             self.navigationItem.rightBarButtonItem!.image = UIImage(named: "listIcon.png")
             tableView.hidden = true
             collectionView.hidden = false
-            collectionView.insertSubview(refreshControl, atIndex: 0)
+            
         } else {
             self.navigationItem.rightBarButtonItem!.image = UIImage(named: "gridIcon.png")
             tableView.hidden = false
             collectionView.hidden = true
-            tableView.insertSubview(refreshControl, atIndex: 0)
         }
     }
     
