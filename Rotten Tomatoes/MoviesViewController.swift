@@ -28,19 +28,22 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
         super.viewDidLoad()
        
         // Setup delegates
-        tableView.dataSource = self
-        tableView.delegate = self
-        collectionView.dataSource = self
-        collectionView.delegate = self
-        searchBar.delegate = self
+        self.tableView.dataSource = self
+        self.tableView.delegate = self
+        self.collectionView.dataSource = self
+        self.collectionView.delegate = self
+        self.searchBar.delegate = self
         
         // Refreshing
-        refreshControl = UIRefreshControl()
-        refreshControl.addTarget(self, action: "onRefresh", forControlEvents: UIControlEvents.ValueChanged)
-        refreshControl.attributedTitle = NSAttributedString(string: "Pull to Refresh")
-        refreshControl2 = refreshControl
-        tableView.insertSubview(refreshControl, atIndex: 0)
-        collectionView.insertSubview(refreshControl2, atIndex: 0)
+        self.refreshControl = UIRefreshControl()
+        self.refreshControl.addTarget(self, action: "onRefresh", forControlEvents: UIControlEvents.ValueChanged)
+        self.refreshControl.attributedTitle = NSAttributedString(string: "Pull to Refresh")
+        self.tableView.insertSubview(refreshControl, atIndex: 0)
+        
+        self.refreshControl2 = UIRefreshControl()
+        self.refreshControl2.addTarget(self, action: "onRefresh", forControlEvents: UIControlEvents.ValueChanged)
+        self.refreshControl2.attributedTitle = NSAttributedString(string: "Pull to Refresh")
+        self.collectionView.insertSubview(refreshControl2, atIndex: 0)
 
         
         let fadedViewtapGestureRecognizer = UITapGestureRecognizer(target: self, action: "onFadedViewTap")
@@ -186,6 +189,7 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
             }, errorMessageView: self.networkErrMess, closeButton: self.xButton)
     
         self.refreshControl.endRefreshing()
+        self.refreshControl2.endRefreshing()
     }
     
     func onXButtonTap() {
