@@ -55,23 +55,23 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
         let progressView = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
         progressView.labelText = "Loading..."
         
-            println(self.networkErrMess.frame.origin.y)
-            self.doIfConnected({
-                let url = NSURL(string: "https://gist.githubusercontent.com/timothy1ee/d1778ca5b944ed974db0/raw/489d812c7ceeec0ac15ab77bf7c47849f2d1eb2b/gistfile1.json")!
-                let request = NSURLRequest(URL: url)
-                NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue()) { (response: NSURLResponse!, data: NSData!, error: NSError!) -> Void in
-                    let json = NSJSONSerialization.JSONObjectWithData(data, options: nil, error: nil) as? NSDictionary
-                    if let json = json {
-                        self.movies = json["movies"] as? [NSDictionary]
-                        self.tableView.reloadData()
-                        self.collectionView.reloadData()
-                    }
+        println(self.networkErrMess.frame.origin.y)
+        self.doIfConnected({
+            let url = NSURL(string: "https://gist.githubusercontent.com/timothy1ee/d1778ca5b944ed974db0/raw/489d812c7ceeec0ac15ab77bf7c47849f2d1eb2b/gistfile1.json")!
+            let request = NSURLRequest(URL: url)
+            NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue()) { (response: NSURLResponse!, data: NSData!, error: NSError!) -> Void in
+                let json = NSJSONSerialization.JSONObjectWithData(data, options: nil, error: nil) as? NSDictionary
+                if let json = json {
+                    self.movies = json["movies"] as? [NSDictionary]
+                    self.tableView.reloadData()
+                    self.collectionView.reloadData()
                 }
-                }, errorMessageView: self.networkErrMess, closeButton: self.xButton)
-            println(self.networkErrMess.frame.origin.y)
-            dispatch_async(dispatch_get_main_queue()) {
-                progressView.hide(true)
             }
+            }, errorMessageView: self.networkErrMess, closeButton: self.xButton)
+        println(self.networkErrMess.frame.origin.y)
+        dispatch_async(dispatch_get_main_queue()) {
+            progressView.hide(true)
+        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -85,7 +85,7 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if let movies = movies {
-            if (searchActive) {
+            if searchActive {
                 return filtered.count
             }
             return movies.count
