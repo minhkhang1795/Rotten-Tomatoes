@@ -1,10 +1,8 @@
-<b> Coderschool - Week 1
-
-Assignment 1: </b>Rotten Tomatoes 
+# Coderschool - Week 1: Rotten Tomatoes 
 
 <b> Time spent: </b>30 hours spent in total
 
-<b> Completed user stories: </b>
+## Completed user stories
 
 + [x] User can view a list of movies from Rotten Tomatoes. Poster images must be loading asynchronously.
 + [x] User can view movie details by tapping on a cell.
@@ -19,7 +17,7 @@ Assignment 1: </b>Rotten Tomatoes
 + Customize the highlight and selection effect of the cell. (optional)
 + [x] Customize the navigation bar. (optional)
 
-<b> Walkthrough of user stories: </b>
+## Walkthrough
 
 ![alt tag](https://github.com/vuminhkhang1995/-Week-1-Assignment-1-Rotten-Tomatoes/blob/master/Walkthrough.gif)
 
